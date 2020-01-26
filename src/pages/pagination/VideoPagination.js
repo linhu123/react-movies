@@ -8,8 +8,7 @@ function showTotal(total) {
 export default class VideoPagination extends React.Component{
     render(){
         return(
-            <div style={{ position:"absolute",/* 相对于容器绝对定位 */
-                bottom:"1%"}}>
+            <div style={{bottom:"1%",width:"100%",float:"right",paddingLeft:"60%"}}>
                 <Pagination size="small" total={50} showSizeChanger showQuickJumper />
             </div>
         );
