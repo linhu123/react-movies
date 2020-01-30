@@ -4,11 +4,30 @@ import Head from '../head/Head'
 import VideoCard from '../card/Card'
 import VideoPagination from '../pagination/VideoPagination'
 import './Home.css'
+import API from '../../configs/api'
 const { Header, Footer, Content } = Layout;
-const cards = [1,2,3,4,5,6,7,8,9]
+
+function getMoviesListData(){
+    API.get('movies/list').then(res=>{
+        console.log(res.data.data[0]);
+        console.log("123")
+    })
+}
+
 function ListCard(){
     var items = [];
     console.log('into listCard function');
+    API.get('movies/list').then(
+        res=>{
+            console.log(res);
+            let result = res.data.data[0]
+            if(result.code === '200'){
+                result.data.map(index=>{
+                    console.log(index.mId);
+                })
+            }
+        }
+    );
     for(let i = 0;i<10;i++){
         console.log(i);
         items.push(<VideoCard/>);
