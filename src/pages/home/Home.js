@@ -16,28 +16,31 @@ function getMoviesListData(){
 
 function ListCard(){
     var items = [];
+    var tulr = "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png";
     console.log('into listCard function');
-    API.get('movies/list').then(
-        res=>{
-            console.log(res);
-            let result = res.data.data[0]
-            if(result.code === '200'){
-                result.data.map(index=>{
-                    console.log(index.mId);
-                })
-            }
-        }
-    );
-    for(let i = 0;i<10;i++){
-        console.log(i);
-        items.push(<VideoCard/>);
-    }
-    return(
-        <div style={{}}>{items}</div>
-    );
-    
+    this.state.movies.map((item,index)=>{
+        return(
+            <VideoCard></VideoCard>
+        );
+    })
 }
 export default class Home extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = { 
+            movies:[]
+         };
+    }
+    componentWillMount(){
+        API.get('movies/list').then(res=>{
+            let result = res.data;
+            if(result.code === 200){
+                this.setState({
+                    movies:result.data
+                });
+            }
+        })
+    }
     render(){
         return(
             <div>
@@ -45,7 +48,16 @@ export default class Home extends React.Component{
                 <Header><Head></Head></Header>
                 <Content>
                     <div style={{float:"left",display:"inline"}}>
-                        <ListCard/>
+                        <div>
+                            {
+                                this.state.movies.map((item,index)=>{
+                                    console.log(item);
+                                    return(
+                                        <VideoCard key={index} movie={JSON.stringify(item)}/>
+                                    );
+                                })
+                            }
+                        </div>
                         <VideoPagination/>
                     </div>
                 </Content>
