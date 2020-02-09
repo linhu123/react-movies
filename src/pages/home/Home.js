@@ -3,27 +3,21 @@ import { Layout,Divider} from 'antd';
 import Head from '../head/Head'
 import VideoCard from '../card/Card'
 import VideoPagination from '../pagination/VideoPagination'
-import './Home.css'
-import API from '../../configs/api'
+import './Home.css';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useParams
+  } from "react-router-dom";  
+import API from '../../configs/api';
+import VideoPlay from '../video/VideoPlay';
 const { Header, Footer, Content } = Layout;
-
-function getMoviesListData(){
-    API.get('movies/list').then(res=>{
-        console.log(res.data.data[0]);
-        console.log("123")
-    })
-}
-
-function ListCard(){
-    var items = [];
-    var tulr = "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png";
-    console.log('into listCard function');
-    this.state.movies.map((item,index)=>{
-        return(
-            <VideoCard></VideoCard>
-        );
-    })
-}
+function MYV() {
+    let id = "test";
+    console.log(id);
+};
 export default class Home extends React.Component{
     constructor(props){
         super(props);
@@ -53,7 +47,9 @@ export default class Home extends React.Component{
                                 this.state.movies.map((item,index)=>{
                                     console.log(item);
                                     return(
+                                        <Link to={"/video/"+item.mId}>
                                         <VideoCard key={index} movie={JSON.stringify(item)}/>
+                                        </Link>
                                     );
                                 })
                             }
