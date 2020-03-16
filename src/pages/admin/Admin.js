@@ -5,6 +5,9 @@ import AdminHead from './adminHead/AdminHead';
 import "./Admin.css";
 import Vtable from './Vtable';
 import AddT from "../addT/AddT";
+import BigCategoryTable from "./table/BigCategoryTable";
+import LittleCategoryTable from "./table/LittleCategoryTable";
+import AreaTable from "./table/AreaTable";
 const { Header, Footer, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
@@ -26,16 +29,21 @@ export default class Admin extends React.Component {
         });
     };
 
-    videoCategoryOnClick = onClick =>{
+    videoBigCategoryOnClick = onClick =>{
         console.log("videoCategoryOnClick")
         this.setState({
-            adminContent:"category"
+            adminContent:<BigCategoryTable/>
+        });
+    }
+    videoLittleCategoryOnClick = onClick =>{
+        this.setState({
+            adminContent:<LittleCategoryTable/>
         });
     }
     videoAreaOnclick = onClick =>{
         console.log("videoAreaOnclick");
         this.setState({
-            adminContent:"videoAreaOnclick"
+            adminContent:<AreaTable/>
         });
     }
    
@@ -54,7 +62,7 @@ export default class Admin extends React.Component {
                             <Icon type="desktop" />
                             <span>视频管理</span>
                         </Menu.Item> 
-                        <Menu.Item key="3" onClick={this.menuVideoOnClick}>
+                        <Menu.Item key="3" onClick={this.videoBigCategoryOnClick}>
                             <Icon type="desktop" />
                             <span>视频分类</span>
                         </Menu.Item>
@@ -70,7 +78,7 @@ export default class Admin extends React.Component {
                             <Icon type="desktop" />
                             <span>视频归属</span>
                         </Menu.Item>
-                        <Menu.Item key="7" onClick={this.videoCategoryOnClick}>
+                        <Menu.Item key="7" onClick={this.videoLittleCategoryOnClick}>
                             <Icon type="desktop" />
                             <span>视频小分类</span>
                         </Menu.Item>                                         
